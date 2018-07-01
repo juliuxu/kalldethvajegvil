@@ -8,6 +8,7 @@ import { ApolloProvider } from "react-apollo";
 
 import ApolloMap from "./src/ApolloMap";
 import config from "./src/config.json";
+import CreateButton from "./src/Create/Button";
 
 const link = createHttpLink({ uri: config.herokuGrahpqlUrl });
 const client = new ApolloClient({
@@ -21,6 +22,7 @@ class App extends React.Component {
       <ApolloProvider client={client}>
         <View style={styles.container}>
           <ApolloMap />
+          <CreateButton />
         </View>
       </ApolloProvider>
     );

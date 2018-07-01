@@ -29,6 +29,7 @@
     "graphql-tag": "^2.9.2",
     "react": "16.4.1",
     "react-apollo": "^2.1.8",
-    "react-native": "~0.55.2"
+    "react-native": "~0.55.2",
+    "react-native-material-ui": "^1.30.0"
   }
 }

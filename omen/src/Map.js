@@ -10,7 +10,6 @@ const MapComp = ({ onSelect, data, initialLocation }) => (
     style={{ flex: 1 }}
     minZoomLevel={16}
     showsUserLocation
-    showsMyLocationButton
     style={{ flex: 1 }}
     initialRegion={{
       latitude: initialLocation.coords.latitude,
