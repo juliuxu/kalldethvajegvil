@@ -3,6 +3,8 @@ import { MapView } from "expo";
 
 import demonTrapImage from "./demon-trap.png";
 
+const OmenCallout = props => "hello";
+
 const Omen = props => (
   <MapView.Marker
     stopPropagation

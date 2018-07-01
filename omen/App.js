@@ -1,13 +1,13 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 
-import Map from "./Map";
+import ApolloMap from "./src/ApolloMap";
 
 export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Map />
+        <ApolloMap />
       </View>
     );
   }

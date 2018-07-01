@@ -1,5 +1,8 @@
 import React from "react";
+import { Text } from "react-native";
 import { MapView } from "expo";
+import gql from "graphql-tag";
+import { Query } from "react-apollo";
 
 import mapStyle from "./mapStyle.json";
 import { withInitialLocation } from "./InitialLocation";
@@ -27,7 +30,7 @@ const mockOmen2 = {
   downvotes: 2
 };
 
-class Map extends React.Component {
+class MapComp extends React.Component {
   state = {
     omens: [mockOmen, mockOmen2]
   };
@@ -47,10 +50,50 @@ class Map extends React.Component {
         provider={MapView.PROVIDER_GOOGLE}
         customMapStyle={mapStyle}
       >
-        {this.state.omens.map(x => <Omen key={x.id} {...x} />)}
+        {this.props.omens.map(x => <Omen key={x.id} {...x} />)}
       </MapView>
     );
   }
 }
+const Map = withInitialLocation()(MapComp);
 
-export default withInitialLocation()(Map);
+const OMEN = gql`
+  fragment OMEN on Omen {
+    id
+    score
+    message
+    latitude
+    longitude
+  }
+`;
+
+const GET_OMENS = gql`
+  query GET_OMENS {
+    omen(first: 10) {
+      edges {
+        node {
+          ...OMEN
+        }
+      }
+    }
+  }
+  ${OMEN}
+`;
+
+const Composed = () => (
+  <Query query={GET_OMENS}>
+    {({ loading, error, data }) => {
+      if (loading) return <Text>Loading...</Text>;
+      if (error) {
+        if (__DEV__) throw error;
+        return <Text>Error!</Text>;
+      }
+
+      console.log("got data", data);
+
+      return <Map omens={data.omen.edges.map(x => x.node)} />;
+    }}
+  </Query>
+);
+
+export default Composed;

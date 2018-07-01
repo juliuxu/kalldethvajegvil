@@ -1,0 +1,4 @@
+{
+  "devGraphqlUrl": "http://10.0.0.207:3000/graphql",
+  "herokuGrahpqlUrl": "https://omenapi.herokuapp.com/graphql"
+}
