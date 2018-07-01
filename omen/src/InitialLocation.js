@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { Text, Platform } from "react-native";
 import { Constants, Location, Permissions } from "expo";
 
+import config from "./config.json";
+
 class InitialLocation extends Component {
   state = {
     location: null,
@@ -27,7 +29,9 @@ class InitialLocation extends Component {
       });
     }
 
-    let location = await Location.getCurrentPositionAsync({});
+    let location = await Location.getCurrentPositionAsync({
+      enableHighAccuracy: config.enableHighAccuracy
+    });
     this.setState({ location });
   };
 
