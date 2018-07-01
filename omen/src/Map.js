@@ -15,6 +15,9 @@ class MapComp extends React.Component {
   render() {
     return (
       <MapView
+        minZoomLevel={16}
+        showsUserLocation
+        showsMyLocationButton
         style={{ flex: 1 }}
         initialRegion={{
           latitude: this.props.initialLocation.coords.latitude,

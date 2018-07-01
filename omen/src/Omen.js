@@ -14,6 +14,7 @@ const Omen = props => (
     title="Omen"
     description={props.message}
     image={demonTrapImage}
+    anchor={{ x: 0.5, y: 0.5 }}
   />
 );
 
