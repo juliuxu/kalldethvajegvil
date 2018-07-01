@@ -15,6 +15,6 @@ class Types::QueryType < Types::BaseObject
   end
 
   def nearby(latitude: nil, longitude: nil)
-    Oman.joins(:location).by_distance(origin: [latitude, longitude])
+    Oman.joins(:location).within(5, :units => :kms, origin: [latitude, longitude]).order('distance asc').all
   end
 end
