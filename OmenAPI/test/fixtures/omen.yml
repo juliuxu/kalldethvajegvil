@@ -1,0 +1,24 @@
+# == Schema Information
+#
+# Table name: omen
+#
+#  id          :integer          not null, primary key
+#  message     :text
+#  location_id :integer
+#  score       :integer
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  user_uuid   :string
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  message: MyText
+  location: one
+  score: 1
+
+two:
+  message: MyText
+  location: two
+  score: 1
