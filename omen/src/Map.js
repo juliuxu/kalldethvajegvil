@@ -19,6 +19,7 @@ const MapComp = ({ onSelect, data, initialLocation }) => (
     }}
     provider={MapView.PROVIDER_GOOGLE}
     customMapStyle={mapStyle}
+    onPress={() => onSelect(null)}
   >
     {data.map(({ node }) => (
       <Omen onPress={() => onSelect(node.id)} key={node.id} {...node} />
