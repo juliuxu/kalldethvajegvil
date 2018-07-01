@@ -62,7 +62,8 @@ const styles = StyleSheet.create({
   },
 
   actionContainer: {
-    flex: 0.1
+    flex: 0.1,
+    alignItems: "center"
   }
 });
 
@@ -115,7 +116,7 @@ class DetailsView extends React.PureComponent {
             <Icon name="keyboard-arrow-up" size={25} />
           </TouchableOpacity>
           <Text style={{ textAlign: "center" }}>
-            {`${omen.upvotes} : ${omen.downvotes}`}
+            {(omen.upvotes || 0) - (omen.downvotes || 0)}
           </Text>
           <TouchableOpacity
             onPress={() =>
