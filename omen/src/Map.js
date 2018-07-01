@@ -8,32 +8,7 @@ import mapStyle from "./mapStyle.json";
 import { withInitialLocation } from "./InitialLocation";
 import Omen from "./Omen";
 
-const mockOmen = {
-  id: "adsadasdas-dsdsad",
-  message: "Hello, World",
-  latitude: 59.91466373483882,
-  longitude: 10.750718960518748,
-  userUuid: "afdsfs-ff3sfdsf-fdsfdsfs",
-  score: 4,
-  upvotes: 6,
-  downvotes: 2
-};
-
-const mockOmen2 = {
-  id: "adsadasdas-ggg",
-  message: "Far away...",
-  latitude: 59.91366173483882,
-  longitude: 10.750108960518748,
-  userUuid: "afdsfs-ff3sfdsf-fdsfdsfs",
-  score: 4,
-  upvotes: 6,
-  downvotes: 2
-};
-
 class MapComp extends React.Component {
-  state = {
-    omens: [mockOmen, mockOmen2]
-  };
   componentDidMount() {
     console.log("Map mount", this.props);
   }
