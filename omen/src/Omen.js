@@ -9,12 +9,11 @@ const Omen = props => (
   <MapView.Marker
     stopPropagation
     flat
-    onPress={() => console.log("Omen marker clicked")}
+    onPress={props.onPress}
     coordinate={{ latitude: props.latitude, longitude: props.longitude }}
     title="Omen"
     description={props.message}
     image={demonTrapImage}
   />
 );
-
 export default Omen;

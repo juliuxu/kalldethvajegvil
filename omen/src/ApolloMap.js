@@ -1,26 +1,68 @@
 import React from "react";
 import { AppRegistry } from "react-native";
-import ApolloClient from "apollo-client";
-import { createHttpLink } from "apollo-link-http";
-import { InMemoryCache } from "apollo-cache-inmemory";
+import DetailsView from "./Components/Details";
+import gql from "graphql-tag";
+import { graphql } from "react-apollo";
 
-import { ApolloProvider } from "react-apollo";
-
-import config from "./config.json";
 import Map from "./Map";
 
-const link = createHttpLink({ uri: config.herokuGrahpqlUrl });
-const client = new ApolloClient({
-  link,
-  cache: new InMemoryCache()
-});
+class ApolloMapComp extends React.Component {
+  static fragments = {
+    omen: gql`
+      fragment omen on Omen {
+        id
+        score
+        upvotes
+        downvotes
+        message
+        latitude
+        longitude
+      }
+    `
+  };
 
-const ApolloMap = () => (
-  <ApolloProvider client={client}>
-    <Map />
-  </ApolloProvider>
-);
+  state = {
+    selected: null
+  };
+
+  setSelected = selected => this.setState({ selected });
+
+  render() {
+    const { omen, loading } = this.props.data;
+    const hasOmens = Boolean(omen && omen.edges);
+
+    return (
+      <React.Fragment>
+        <Map onSelect={this.setSelected} data={hasOmens ? omen.edges : []} />
+        {this.state.selected && (
+          <DetailsView
+            omen={
+              hasOmens
+                ? omen.edges.find(({ node }) => node.id === this.state.selected)
+                    .node
+                : {}
+            }
+          />
+        )}
+      </React.Fragment>
+    );
+  }
+}
+
+const OMEN_QUERY = gql`
+  query GetOmens {
+    omen(first: 10) {
+      edges {
+        node {
+          ...omen
+        }
+      }
+    }
+  }
+  ${ApolloMapComp.fragments.omen}
+`;
+
+const ApolloMap = graphql(OMEN_QUERY)(ApolloMapComp);
 
 AppRegistry.registerComponent("Omen", () => ApolloMap);
-
 export default ApolloMap;
